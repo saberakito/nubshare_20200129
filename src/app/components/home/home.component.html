@@ -1,0 +1,217 @@
+
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">จัดการ COMMENT</h5>
+        <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Default checked -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="filterComment_id" (click)="filterComment()" >
+          <label class="custom-control-label" for="filterComment_id">ต้องการกรองข้อความ</label>
+        </div>
+        <ng-container *ngIf="inputFilter==true">
+          <div class="custom-control">
+            <label for="filterTextComment">กรอกข้อความที่ต้องการกรอง</label>
+            <input type="text" id="filterTextComment" class="form-control">
+          </div>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" (click)="getComment()" class="btn btn-primary">ตกลง</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+ 
+  <form #form='ngForm' (ngSubmit)="onSubmit(form)">
+    <div class="md-form input-group" style="padding-top:20px;">
+      <input type="text" name="dp_link" [(ngModel)]="dp_link" class="form-control" placeholder="https://www.facebook.com/your-fanpage-name" aria-label="Recipient's username with two button addons"
+        aria-describedby="button-addon4">
+      <div class="input-group-append" id="button-addon4">
+        <button class="btn btn-success" type="submit" ejs-button style="margin-left: 0px;">เลือกโพส</button>
+      </div>
+    </div>
+  </form>
+  <div>
+    จัดกิจกรรมให้คนไลค์แชร์ *ต้องเป็นโพสที่ตั้งเป็นสาธารณะเท่านั้น
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-7 mx-auto">
+      <ul class="timeline">
+        <ng-container *ngFor="let list_post of list_posts; index as i; first as isFirst;let l = count">
+          <li class="timeline-item bg-white rounded ml-3 p-4 shadow" id="{{list_post.time_stamp}}">
+              <div class="timeline-arrow"></div>
+              <h2 class="h5 mb-0">{{list_post.name_page}}</h2><span class="small text-gray">
+                <a target="_blank" href="http://www.facebook.com{{list_post.link_slect_post}}">
+                  <i class="fa fa-clock-o mr-1"></i>{{list_post.title_time}}
+                </a>
+              </span>
+              <p class="text-small mt-2 font-weight-light">{{list_post.post_message}}</p>
+              <ng-container *ngIf="list_post.image_video!=''">
+                    
+                <div class="image_post"   [ngStyle]="{backgroundImage:'url(' + list_post.image_video  + ')'}" >
+
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="list_post.image_post!=''">
+                <div class="image_post"   [ngStyle]="{backgroundImage:'url(' + list_post.image_post  + ')'}" >
+
+                </div>
+              </ng-container>
+              <span class="badge badge-primary btn_select" (click)="selctPost(list_post.time_stamp,list_post.link_slect_post,list_post.link_like,list_post.name_page,list_post.post_message)">เลือกโพสนี้</span>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+  <ng-container *ngIf="name_page!=null&&name_page!=''">
+      <div class="card text-center">
+        <div class="card-header">
+          {{name_page}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><img src="{{image_link}}" alt=""></h5>
+          <p class="card-text" style="text-align: left;">{{post_message}}</p>
+         <div id="{{link_like}}" (click)="saveLike($event,dp_id)" class="btn btn-primary link_{{dp_id}}" >Save รายชื่อ (Like)</div>  
+         <a href="#" class="btn btn-primary" style="margin-left:20px;">Save รายชื่อ (Comment)</a>  
+         <a href="#" class="btn btn-primary" style="margin-left:20px;">Save รายชื่อ (Share)</a>  
+        </div>
+        <div class="card-footer text-muted">
+            {{all_likes}} LIKE 
+            {{all_comments}}
+        </div>
+        
+      </div>
+  </ng-container>
+  <!-- <div class="area_result">
+      
+    <div class="detail_left">
+      <div class="img_link"> </div>
+    </div>
+    <div class="detail_right">
+      <div class="title_link">
+        
+        
+      </div>
+    </div>
+  </div> -->
+
+  <ng-container *ngIf="login_status_check=='1'">
+      <section class="columns">
+            <div class="column" id="nublike">
+              <h2 style="text-align: center;">นับไลค์ (LIKE)</h2>
+              <input type="text" name="" id="nub_like">
+              <button type="button"  (click)="getLike()" class="btn_event btn btn-success">เลือกกิจกรรมนี้</button>
+            </div>
+            
+            <div class="column" id="nubshare">
+              <h2  style="text-align: center;">นับแชร์ (SHARE)</h2>
+              <input type="text" name="" id="nub_share">
+              <input type="text" name="" id="link_id">
+              <input type="hidden" name="" id="link_post">
+              <button type="button" (click)="getShare()" class="btn_event btn btn-success">เลือกกิจกรรมนี้</button>
+            </div>
+            
+            <div class="column" id="nubcomment">
+              <h2  style="text-align: center;">นับคอมเม้น (COMMENT)</h2>
+              <input type="text" name="" id="nub_comment">
+              <button  data-toggle="modal" data-target="#basicExampleModal" type="button" class="btn_event btn btn-success">เลือกกิจกรรมนี้</button>
+            </div>
+      </section>
+
+
+      <div id="outer">
+          <div class="win_game " id="inner">
+              <form  #form='ngForm' (ngSubmit)="onSubmitUserWin(form)" class="form-inline">
+                <div class="form-group mb-2">
+                  <label>Name</label>
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                  <label for="name" class="sr-only">Name</label>
+                  <input type="hidden" value="{{dp_id}}" [(ngModel)]="dp_id" name="dp_id">
+                  <!-- <input type="text" value="{{user_win_id}}" [(ngModel)]="user_win_id" name="user_win_id"> -->
+                  <input type="hidden" value="{{type_event}}" [(ngModel)]="type_event" name="type_event">
+                  <div class="slottt-machine-recipe">
+                    <div class="slottt-machine-recipe__mask" id="wordbox">
+                        <div class="slottt-machine-recipe__items_container recipe_if">
+                        </div>
+                    </div>
+                  </div>
+                  <!-- <input type="text" name="user_win" [(ngModel)]="user_win" value="{{user_win}}" class="form-control" id="{{user_win_id}}" placeholder="Name"> -->
+                </div>
+                <button type="submit"  class="btn btn-primary mb-2">เพิ่มผู้ถูกรางวัล</button>
+              </form>
+              <div id="outer">
+                  <div  id="inner">
+                      <button type="button" (click)="randomUser()" class="btn btn-primary mb-2" style="padding-left:40px; padding-right: 40px;">สุ่ม</button>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+
+
+      <div id="outer">
+          <div class="win_game " id="inner">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">ชื่อ</th>
+                      <th scope="col">ลิ้ง</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      
+                      <ng-container *ngIf="data_user_win!=null&&data_user_win!=''">
+                          <ng-container *ngFor="let userwin of data_user_win; index as i; first as isFirst;let l = count">
+                              <tr>
+                                  <th scope="row">{{userwin.dw_fb_name}}</th>
+                                  <td> <a href="https://www.facebook.com/{{userwin.dw_fb_id}}" target="_bank"> link</a></td>
+                                </tr>
+                                <tr>
+                            </ng-container>
+                          
+                      </ng-container>
+                    <!-- <tr>
+                      <th scope="row">name 1</th>
+                      <td>link</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">name 2</th>
+                      <td>link</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">name 3</th>
+                      <td>link</td>
+                    </tr> -->
+                  </tbody>
+                </table>
+          </div>
+      </div>
+      <ng-container *ngIf="data_user_like!=null&&data_user_like!=''">
+        <h2>User Like</h2>
+        <ul class="list-group">
+          <ng-container *ngFor="let promotion of data_user_like; index as i; first as isFirst;let l = count">
+            <li class="list-group-item">{{promotion.user_name}}</li>
+          </ng-container>
+        </ul>
+      </ng-container>
+      
+  </ng-container>
+  
+

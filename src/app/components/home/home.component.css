@@ -1,0 +1,209 @@
+
+#inner {
+    display: table;
+    margin: 0 auto;
+  }
+  
+  #outer {
+    width:100%
+  }
+  .table{
+      width: 320px;
+  }
+
+  .image_post{
+    width: 100%;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px;
+  }
+
+.btn_select{
+    font-weight: 100;
+    padding: 10px 20px 10px 20px;
+}
+
+.active_post{
+    background: rgb(247, 247, 178) !important;
+}
+
+.btn_select:hover{
+    cursor: pointer;
+}
+
+.columns {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	margin: 5px 0;
+}
+
+.column {
+	flex: 1;
+	border: 1px solid gray;
+	margin: 2px;
+    padding: 10px;
+    min-height: 150px;
+    text-align: center;
+    position: relative;
+	&:first-child { margin-left: 0; }
+	&:last-child { margin-right: 0; }
+	
+}
+
+.btn_event{
+    margin-top: 40px;
+}
+.win_game{
+    
+}
+
+/* @media screen and (max-width: 980px) {
+    .columns .column {
+          margin-bottom: 5px;
+      flex-basis: 40%;
+          &:nth-last-child(2) {
+              margin-right: 0;
+          }
+          &:last-child {
+              flex-basis: 100%;
+              margin: 0;
+          }
+      }
+  } */
+  
+  @media screen and (max-width: 425px) {
+      .columns .column {
+          flex-basis: 100%;
+          margin: 0 0 5px 0;
+      }
+  }
+
+
+
+
+
+
+
+
+  /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+/* Timeline holder */
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+ /* Timeline vertical line */
+ul.timeline:before {
+    content: ' ';
+    background: #fff;
+    display: inline-block;
+    position: absolute;
+    left: 16px;
+    width: 4px;
+    height: 100%;
+    z-index: 400;
+    border-radius: 1rem;
+}
+
+
+
+
+
+li.timeline-item {
+    margin: 20px 0;
+}
+
+/* Timeline item arrow */
+.timeline-arrow {
+    border-top: 0.5rem solid transparent;
+    border-right: 0.5rem solid #fff;
+    border-bottom: 0.5rem solid transparent;
+    display: block;
+    position: absolute;
+    left: 2rem;
+}
+
+.timeline-arrow.active_post_arrow {
+    border-top: 0.5rem solid transparent;
+    border-right: 0.5rem solid rgb(247, 247, 178) !important;
+    border-bottom: 0.5rem solid transparent;
+    display: block;
+    position: absolute;
+    left: 2rem;
+}
+
+
+
+
+/* Timeline item circle marker */
+li.timeline-item::before {
+    content: ' ';
+    background: #ddd;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    left: 11px;
+    width: 14px;
+    height: 14px;
+    z-index: 400;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.slottt-machine-recipe {
+    margin: 0px auto;
+    width: 300px;
+  }
+
+  .slottt-machine-recipe__mask {
+      width: 100%;
+      height: 30px;
+      overflow: hidden; 
+      position: relative;
+      display: inline-block;
+  }
+
+  .slottt-machine-recipe__items_container {
+      position: absolute;
+  }
+
+  .slottt-machine-recipe__item {
+      min-height: 150px;
+      max-height: 150px;
+      margin: 0px;
+      padding: 0px;
+      background-size: contain;
+  }
+
+  /* Typography */
+
+  body {
+    font-family: Helvetica, Arial, sans serif;
+  }
+
+  .recipe_if, .recipe_then {
+      font-weight: bold;
+      font-size: 20px;
+  }
+
+  .tagline {
+    font-weight: normal;
+    font-size: 24px;
+  }
+
+  a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #33CCFF;
+  }

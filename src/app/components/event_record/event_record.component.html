@@ -1,0 +1,74 @@
+<div class="container">
+
+
+<div id="outer">
+    <div class="win_game " id="inner">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">กิจกรรม</th>
+                <th scope="col">Post Message</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let listPost of listPosts; index as i; first as isFirst;let l = count">
+                <tr>
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{listPost.post_message}}</td>
+                  <td><button (click)="selectPost(listPost.dp_id)" class="btn_event btn btn-success" type="button">เลือก</button></td>
+                </tr>
+              </ng-container>
+              <!-- 
+              <tr>
+                <th scope="row">2</th>
+                <td>100</td>
+                <td>คลิก</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>200</td>
+                <td>คลิก</td>
+              </tr> -->
+
+            </tbody>
+          </table>
+    </div>
+    <section class="columns">
+        <div class="column">
+            <h2 style="text-align: center;">นับไลค์ (LIKE)</h2>
+            <div (click)="selectTypeData('1')" class="btn_event p-3 mb-2 bg-primary text-white hover">{{data_like}}</div>
+          </div>
+          
+          <div class="column">
+            <h2  style="text-align: center;">นับแชร์ (SHARE)</h2>
+            <div (click)="selectTypeData('3')" class="btn_event p-3 mb-2 bg-primary text-white hover">{{data_share}}</div>
+          </div>
+          
+          <div class="column">
+            <h2  style="text-align: center;">นับคอมเม้น (COMMENT)</h2>
+            <div (click)="selectTypeData('2')" class="btn_event p-3 mb-2 bg-primary text-white hover">{{data_comment}}</div>
+          </div>
+    </section>
+
+    <div class="win_game " id="inner">
+        <table class="table" >
+            <thead>
+              <tr>
+                <th scope="col">ชื่อ</th>
+                <th scope="col">ลิ้ง</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let userWin of userWins; index as i; first as isFirst;let l = count">
+                <tr>
+                  <th scope="row">{{userWin.dw_fb_name}}</th>
+                  <td><a href="https://www.facebook.com/{{userWin.dw_fb_id}}" target="_blank">link</a></td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+</div>

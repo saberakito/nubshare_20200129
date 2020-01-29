@@ -1,0 +1,22 @@
+<div class="{{class_checkShow}}" >
+<div class="header-area" *ngIf="showHeader">
+  <div class="container">
+    <div class="Text-site"></div>
+    <div class="logo_site">
+      <img src="{{local__}}/upload/files/{{adjust_page_image_name}}.{{adjust_page_image_type}}"  alt="">
+    </div>
+    
+  </div>
+</div>
+<app-navbar *ngIf="showHeader"></app-navbar>
+<div class="content ">
+  <router-outlet></router-outlet>
+</div>
+</div>
+<!-- <div class="m_footer col-xs-12">
+    <div class="col-xs-3" routerLink="/home"><img src="assets/images/footer/icon-home.png"></div>
+    <div class="col-xs-3" ><a href="http://line.me/ti/p/~@ufabet2688" target="_bank"><img src="assets/images/footer/icon-line.png"></a></div>
+    <div class="col-xs-3" routerLink="/promotion"><img src="assets/images/footer/icon_guide.png"></div>
+    <div class="col-xs-3" routerLink="/page/register" ><img src="assets/images/footer/icon_add.png"></div>
+</div>
+<app-footer *ngIf="showHeader"></app-footer> -->
